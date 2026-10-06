@@ -1,0 +1,695 @@
+<!DOCTYPE html> 
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+    <meta content="mobile_tab" name="shell-type"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet"/> 
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary": "#452b00", "tertiary": "#ffb5a0", "inverse-surface": "#efdfd7", "primary": "#ffb693", "on-surface-variant": "#e2bfb0", "background": "#19120d", "on-error-container": "#ffdad6", "error-container": "#93000a", "primary-fixed-dim": "#ffb693", "tertiary-fixed": "#ffdbd1", "on-secondary-container": "#694300", "on-surface": "#efdfd7", "on-secondary-fixed": "#291800", "error": "#ffb4ab", "surface-container": "#261e19", "on-secondary-fixed-variant": "#633f00", "on-primary-container": "#572000", "primary-container": "#ff6b00", "secondary-fixed": "#ffddb4", "tertiary-container": "#ff693e", "on-primary-fixed": "#351000", "outline": "#a98a7d", "surface-bright": "#413732", "surface-container-highest": "#3c332d", "on-primary-fixed-variant": "#7a3000", "secondary-container": "#ffaa00", "surface-tint": "#ffb693", "on-tertiary-fixed-variant": "#872000", "secondary-fixed-dim": "#ffb952", "outline-variant": "#5a4136", "surface-container-low": "#221a15", "secondary": "#ffcf90", "surface-dim": "#19120d", "on-tertiary-container": "#611500", "inverse-primary": "#a04100", "surface-container-lowest": "#140d08", "surface": "#19120d", "on-primary": "#561f00", "on-error": "#690005", "on-tertiary": "#601400", "primary-fixed": "#ffdbcc", "on-tertiary-fixed": "#3b0900", "surface-container-high": "#312823", "tertiary-fixed-dim": "#ffb5a0", "on-background": "#efdfd7", "inverse-on-surface": "#382f29", "surface-variant": "#3c332d" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "gutter-sm": "0.75rem", "space-lg": "1.5rem", "space-md": "1rem", "margin-desktop": "3rem", "gutter": "1.25rem", "margin": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "gutter-lg": "2rem", "space-xl": "2.5rem" }, "fontFamily": { "headline-md": ["Syne"], "headline-lg": ["Syne"], "body-lg": ["Space Grotesk"], "label-sm": ["Space Grotesk"], "headline-sm": ["Syne"], "label-lg": ["Space Grotesk"], "display-lg": ["Syne"], "label-md": ["Space Grotesk"], "body-md": ["Space Grotesk"], "display-lg-mobile": ["Syne"], "body-sm": ["Space Grotesk"] }, "fontSize": { "headline-md": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "700" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }], "display-lg-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }] } } } }
+    </script>
+    <style>
+        @layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;background-color:#19120d;color:#efdfd7;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen">
+    
+    <header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div class="h-16 px-gutter flex items-center justify-between max-w-2xl mx-auto">
+            <div class="flex items-center gap-space-sm">
+                <div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center shadow-[0_0_16px_rgba(255,107,0,0.5)]">
+                    <span class="material-symbols-outlined text-on-primary-container text-[20px]">local_fire_department</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-headline-sm text-headline-sm leading-none text-on-surface tracking-tight">CHURRO KINGS</span>
+                    <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Bakery Menu</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-space-sm">
+                <a class="min-w-[44px] min-h-[44px] px-space-md h-10 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-[0_0_20px_rgba(37,211,102,0.45)] transition-all active:scale-95" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Quiero%20hacer%20un%20pedido%20directo" rel="noopener noreferrer" target="_blank">
+                    <span class="material-symbols-outlined text-[19px]">chat</span><span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col relative w-full max-w-2xl mx-auto pt-16 pb-28 px-gutter bg-surface">
+        <div class="flex flex-col w-full relative overflow-hidden pb-12"> 
+            
+            <!-- Dynamic Ambient Glows --> 
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-80 h-80 bg-primary-container/20 rounded-full blur-[90px] pointer-events-none"></div> 
+            <div class="absolute top-[650px] -right-20 w-72 h-72 bg-secondary-container/15 rounded-full blur-[80px] pointer-events-none"></div> 
+            <div class="absolute top-[1400px] -left-20 w-80 h-80 bg-tertiary-container/15 rounded-full blur-[90px] pointer-events-none"></div> 
+            
+            <!-- SECTION 1: HERO IMMERSIVO --> 
+            <section class="flex flex-col items-center text-center relative z-10 pt-2 pb-6"> 
+                <div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-highest/80 backdrop-blur-xl shadow-[0_0_24px_rgba(255,107,0,0.35)] animate-pulse"> 
+                    <span class="material-symbols-outlined text-primary text-[16px]">arrow_back_ios_new</span> 
+                    <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase font-bold">¡Aquí puedes tener tu Momento Dulce!</span> 
+                    <span class="material-symbols-outlined text-primary text-[16px]">arrow_forward_ios</span> 
+                </div> 
+                <h1 class="mt-space-md font-display-lg-mobile text-display-lg-mobile text-on-surface font-extrabold tracking-tight leading-none px-space-xs">
+                    El Rey de los <span class="bg-gradient-to-r from-primary via-secondary to-primary-container bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(255,107,0,0.6)]">Churros</span> &amp; Postres Irresistibles
+                </h1> 
+                <p class="mt-space-sm font-body-md text-body-md text-on-surface-variant max-w-xs">
+                    Masa artesanal crujiente al instante, bañada en azúcar canela y los toppings más adictivos de la ciudad.
+                </p> 
+                
+                <div class="relative w-full my-space-sm flex flex-col items-center select-none"> 
+                    <div class="absolute inset-0 m-auto w-64 h-64 bg-gradient-to-tr from-primary-container/30 to-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div> 
+                    <div class="w-full h-80 relative z-10 rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing" id="churro-3d-canvas-container"></div> 
+                    <div class="relative z-20 -mt-4 px-space-md py-1.5 rounded-full bg-surface-container-lowest/85 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.6)] border border-outline-variant/30 flex items-center gap-space-xs"> 
+                        <span class="material-symbols-outlined text-primary text-[15px] animate-bounce">touch_app</span> 
+                        <span class="font-label-sm text-label-sm text-secondary tracking-wider font-semibold">Gira el churro en 3D | Arrastra para ver el glaseado</span> 
+                    </div> 
+                </div> 
+
+                <div class="flex flex-col sm:flex-row w-full gap-space-sm px-space-xs mt-space-md"> 
+                    <a class="w-full h-14 rounded-full bg-gradient-to-r from-primary-container via-secondary-container to-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-[0_0_28px_rgba(255,107,0,0.55)] active:scale-[0.98] transition-transform" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Quiero%20pedir%20mis%20churros%20calientes" rel="noopener noreferrer" target="_blank"> 
+                        <span class="material-symbols-outlined text-[22px]">chat</span> <span>Pedir por WhatsApp</span> 
+                    </a> 
+                    <a class="w-full h-14 rounded-full bg-surface-container-highest/60 backdrop-blur-xl text-secondary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-[0_4px_20px_rgba(0,0,0,0.4)] active:scale-[0.98] transition-transform" href="#menu-seccion"> 
+                        <span class="material-symbols-outlined text-[20px]">menu_book</span> <span>Ver Menú Real</span> 
+                    </a> 
+                </div> 
+            </section> 
+
+            <!-- SECTION 2: BARRA DE ESTATUS Y UBICACIÓN --> 
+            <section class="mt-space-md"> 
+                <div class="p-space-md rounded-lg bg-surface-container-low/75 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.5)]"> 
+                    <div class="flex items-center gap-space-xs mb-space-sm"> 
+                        <span class="w-2.5 h-2.5 rounded-full bg-secondary-container shadow-[0_0_10px_#ffaa00] animate-ping"></span> 
+                        <span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-widest">Punto de Sabor Activo</span> 
+                    </div> 
+                    <div class="grid grid-cols-1 gap-space-sm"> 
+                        <!-- Tarjeta Sede Oficial ahora clickeable hacia Maps -->
+                        <a href="https://maps.google.com/?q=Parque+Ferial+Ocumare+del+Tuy" target="_blank" class="flex items-center gap-space-sm p-space-xs bg-surface-container/60 hover:bg-surface-container/80 transition-colors rounded-DEFAULT cursor-pointer"> 
+                            <div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"> 
+                                <span class="material-symbols-outlined text-[22px]">pin_drop</span> 
+                            </div> 
+                            <div class="flex flex-col min-w-0"> 
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Sede Oficial (Toca para ir)</span> 
+                                <span class="font-headline-sm text-headline-sm text-on-surface truncate">Parque Ferial - Ocumare del Tuy</span> 
+                            </div> 
+                        </a> 
+                        <div class="flex items-center gap-space-sm p-space-xs bg-surface-container/60 rounded-DEFAULT"> 
+                            <div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary"> 
+                                <span class="material-symbols-outlined text-[22px]">schedule</span> 
+                            </div> 
+                            <div class="flex flex-col min-w-0"> 
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Horario Caliente</span> 
+                                <span class="font-body-md text-body-md text-on-surface">Miércoles a Domingos desde las 4:00 PM</span> 
+                            </div> 
+                        </div> 
+                        <div class="flex items-center gap-space-sm p-space-xs bg-surface-container/60 rounded-DEFAULT"> 
+                            <div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary"> 
+                                <span class="material-symbols-outlined text-[22px]">moped</span> 
+                            </div> 
+                            <div class="flex flex-col min-w-0"> 
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Modalidades</span> 
+                                <span class="font-body-md text-body-md text-on-surface">Delivery express &amp; Pick-up en punto</span> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </section> 
+
+            <!-- SECTION 3: ESPECIALIDADES DEL MENÚ --> 
+            <section class="mt-space-xl flex flex-col" id="menu-seccion"> 
+                <div class="flex items-center justify-between mb-space-sm"> 
+                    <div class="flex flex-col"> 
+                        <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Carta Artesanal</span> 
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">Especialidades del Rey</h2> 
+                    </div> 
+                    <a class="w-10 h-10 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] shadow-[0_0_14px_rgba(37,211,102,0.35)]" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Quiero%20consultar%20el%20men%C3%BA%20completo" rel="noopener noreferrer" target="_blank"> 
+                        <span class="material-symbols-outlined text-[22px]">chat</span> 
+                    </a> 
+                </div> 
+                
+                <div class="flex flex-col gap-space-md"> 
+                    <div class="relative overflow-hidden rounded-lg bg-surface-container/70 backdrop-blur-xl shadow-[0_16px_36px_rgba(0,0,0,0.5)]"> 
+                        <div class="relative h-48 w-full overflow-hidden"> 
+                            <img alt="Dubai King Churro con Pistacho" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdikFL_daQziBzRXaGfq9Yz4V_vlRbamY196bePi_qwqK-9kdjpfzfmjMhy4-QD3PAMSiJtU5IJYMuXKapad4yVYJMl9KdFW3cqBzvu1iR_mOl8g2MRet2VIeCpG8zEPt3DtnvKljYDJDdxc-KFwopTZrMNp5MSTy934Pnk-jXOY9Wg07s4hF3qzbhU3A1ZKrDqcvA6_fjMbNkyixupkA3IVgZa-xIveZ0EOI3EjCX_C2DRlZCLgd3ku4ig8FSsEzQmg"/> 
+                            <div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/40 to-transparent"></div> 
+                            <div class="absolute top-3 left-3 px-space-sm py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase font-black shadow-[0_0_14px_#ff6b00]">Edición Exclusiva</div> 
+                            <div class="absolute bottom-3 right-3 px-space-md py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-secondary font-headline-sm text-headline-sm">Favorito VIP</div> 
+                        </div> 
+                        <div class="p-space-md flex flex-col"> 
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Dubai King</h3> 
+                            <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">5 churros calientes bañados con crema artesanal de pistacho premium y finos hilos de chocolate amargo crocante.</p> 
+                            <div class="mt-space-md flex items-center justify-between"> 
+                                <span class="font-label-md text-label-md text-primary tracking-wide">Pistacho Real &amp; Crunch</span> 
+                                <button class="px-space-md py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-md text-label-md flex items-center gap-1.5 shadow-[0_0_18px_rgba(37,211,102,0.45)] active:scale-95 transition-all" onclick="orderWhatsApp('Dubai King (Pistacho Real &amp; Chocolate Crunch)')"> 
+                                    <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir por WhatsApp</span> 
+                                </button> 
+                            </div> 
+                        </div> 
+                    </div> 
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md"> 
+                        <div class="p-space-md rounded-lg bg-surface-container-low/80 backdrop-blur-xl shadow-[0_12px_28px_rgba(0,0,0,0.45)] flex flex-col justify-between"> 
+                            <div> 
+                                <div class="flex justify-between items-start"> 
+                                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold">Clásico Dorado</span> 
+                                    <span class="font-headline-md text-headline-md text-primary">2,00$</span> 
+                                </div> 
+                                <h4 class="mt-space-sm font-headline-sm text-headline-sm text-on-surface">Suggar King</h4> 
+                                <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">5 churros recién salidos del aceite dorado con lluvia de azúcar y canela dulce aromática.</p> 
+                            </div> 
+                            <button class="mt-space-md w-full py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(37,211,102,0.35)] active:scale-95 transition-all" onclick="orderWhatsApp('Suggar King (5 Churros Azúcar Canela - 2$)')"> 
+                                <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir Suggar</span> 
+                            </button> 
+                        </div> 
+                        
+                        <div class="p-space-md rounded-lg bg-surface-container-low/80 backdrop-blur-xl shadow-[0_12px_28px_rgba(0,0,0,0.45)] flex flex-col justify-between"> 
+                            <div> 
+                                <div class="flex justify-between items-start"> 
+                                    <span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold">Doble Salsa</span> 
+                                    <span class="font-headline-md text-headline-md text-primary">4,00$</span> 
+                                </div> 
+                                <h4 class="mt-space-sm font-headline-sm text-headline-sm text-on-surface">Topping King</h4> 
+                                <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">5 churros con 2 toppings a tu elección (Chocolate, Arequipe sedoso o Leche Condensada).</p> 
+                            </div> 
+                            <button class="mt-space-md w-full py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(37,211,102,0.35)] active:scale-95 transition-all" onclick="orderWhatsApp('Topping King (5 Churros con 2 Toppings - 4$)')"> 
+                                <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir Topping</span> 
+                            </button> 
+                        </div> 
+                    </div> 
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md"> 
+                        <div class="p-space-md rounded-lg bg-surface-container-low/80 backdrop-blur-xl shadow-[0_12px_28px_rgba(0,0,0,0.45)] flex flex-col justify-between"> 
+                            <div> 
+                                <div class="flex justify-between items-start"> 
+                                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold">10 Churros</span> 
+                                    <span class="font-headline-md text-headline-md text-primary">7,00$</span> 
+                                </div> 
+                                <h4 class="mt-space-sm font-headline-sm text-headline-sm text-on-surface">Twist King</h4> 
+                                <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">10 churros crujientes con 2 toppings generosos en vasito o bañados directos.</p> 
+                            </div> 
+                            <button class="mt-space-md w-full py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(37,211,102,0.35)] active:scale-95 transition-all" onclick="orderWhatsApp('Twist King (10 Churros + 2 Toppings - 7$)')"> 
+                                <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir Twist</span> 
+                            </button> 
+                        </div> 
+                        
+                        <div class="p-space-md rounded-lg bg-surface-container-low/80 backdrop-blur-xl shadow-[0_12px_28px_rgba(0,0,0,0.45)] flex flex-col justify-between"> 
+                            <div> 
+                                <div class="flex justify-between items-start"> 
+                                    <span class="px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">Pack Fiesta (20u)</span> 
+                                    <span class="font-headline-md text-headline-md text-primary">12,00$</span> 
+                                </div> 
+                                <h4 class="mt-space-sm font-headline-sm text-headline-sm text-on-surface">Box King</h4> 
+                                <p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">Caja gigante de 20 churros para compartir en familia con 3 toppings a elegir.</p> 
+                            </div> 
+                            <button class="mt-space-md w-full py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(37,211,102,0.35)] active:scale-95 transition-all" onclick="orderWhatsApp('Box King (Caja Fiesta 20 Churros + 3 Toppings - 12$)')"> 
+                                <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir Box King</span> 
+                            </button> 
+                        </div> 
+                    </div> 
+
+                    <div class="rounded-lg bg-surface-container-high/70 backdrop-blur-xl p-space-md shadow-[0_16px_36px_rgba(0,0,0,0.5)]"> 
+                        <div class="flex items-center gap-space-xs mb-space-sm"> 
+                            <span class="material-symbols-outlined text-secondary text-[22px]">icecream</span> 
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface">Helados, Barquillas &amp; Salados</h3> 
+                        </div> 
+                        <div class="grid grid-cols-1 gap-space-sm"> 
+                            <div class="flex items-center justify-between p-space-sm rounded-DEFAULT bg-surface-container/60"> 
+                                <div class="flex flex-col"> 
+                                    <div class="flex items-center gap-space-xs"> 
+                                        <span class="font-headline-sm text-headline-sm text-on-surface">Ice King</span> 
+                                        <span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm">3,00$</span> 
+                                    </div> 
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Helado cremoso con base de churro recién frito y sirope</span> 
+                                </div> 
+                                <button class="h-10 px-3 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-sm text-label-sm flex items-center gap-1 shrink-0 shadow-[0_0_12px_rgba(37,211,102,0.4)] active:scale-95 transition-all" onclick="orderWhatsApp('Ice King (Helado con churros y sirope - 3$)')"> 
+                                    <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir</span> 
+                                </button> 
+                            </div> 
+                            <div class="flex items-center justify-between p-space-sm rounded-DEFAULT bg-surface-container/60"> 
+                                <div class="flex flex-col"> 
+                                    <span class="font-headline-sm text-headline-sm text-on-surface">Barquillas Artesanales</span> 
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">1 Porción: 1.30$ | 2 Porciones: 1.50$ | Rellena: 1.70$</span> 
+                                </div> 
+                                <button class="h-10 px-3 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-sm text-label-sm flex items-center gap-1 shrink-0 shadow-[0_0_12px_rgba(37,211,102,0.4)] active:scale-95 transition-all" onclick="orderWhatsApp('Barquillas Artesanales')"> 
+                                    <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir</span> 
+                                </button> 
+                            </div> 
+                            <div class="flex items-center justify-between p-space-sm rounded-DEFAULT bg-surface-container/60"> 
+                                <div class="flex flex-col"> 
+                                    <div class="flex items-center gap-space-xs"> 
+                                        <span class="font-headline-sm text-headline-sm text-on-surface">Tequeños de Queso</span> 
+                                        <span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm">3,00$</span> 
+                                    </div> 
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">8 piezas crujientes con queso fundente de primera calidad</span> 
+                                </div> 
+                                <button class="h-10 px-3 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-sm text-label-sm flex items-center gap-1 shrink-0 shadow-[0_0_12px_rgba(37,211,102,0.4)] active:scale-95 transition-all" onclick="orderWhatsApp('Tequeños de Queso (8 piezas crujientes - 3$)')"> 
+                                    <span class="material-symbols-outlined text-[18px]">chat</span> <span>Pedir</span> 
+                                </button> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </section> 
+
+            <!-- SECTION 4: TOPPINGS & SALSAS ARTESANALES --> 
+            <section class="mt-space-xl flex flex-col"> 
+                <div class="flex flex-col mb-space-sm"> 
+                    <span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Personaliza tu Trono</span> 
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">Toppings &amp; Salsas</h2> 
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Toca tus favoritos y ordénalos directos por WhatsApp</p> 
+                </div> 
+                
+                <div class="flex flex-wrap gap-space-xs" id="topping-chips"> 
+                    <button class="px-space-md py-2.5 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-on-surface font-label-md text-label-md flex items-center gap-space-xs shadow-sm transition-all active:scale-95" onclick="toggleTopping(this, 'Arequipe Casero')"> 
+                        <span class="material-symbols-outlined text-secondary text-[18px]">liquor</span> <span>Arequipe Casero</span> 
+                    </button> 
+                    <button class="px-space-md py-2.5 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-on-surface font-label-md text-label-md flex items-center gap-space-xs shadow-sm transition-all active:scale-95" onclick="toggleTopping(this, 'Chocolate Supremo')"> 
+                        <span class="material-symbols-outlined text-primary text-[18px]">cookie</span> <span>Chocolate Supremo</span> 
+                    </button> 
+                    <button class="px-space-md py-2.5 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-on-surface font-label-md text-label-md flex items-center gap-space-xs shadow-sm transition-all active:scale-95" onclick="toggleTopping(this, 'Leche Condensada')"> 
+                        <span class="material-symbols-outlined text-secondary text-[18px]">water_drop</span> <span>Leche Condensada</span> 
+                    </button> 
+                    <button class="px-space-md py-2.5 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center gap-space-xs shadow-[0_0_14px_#ff6b00] transition-all active:scale-95" onclick="toggleTopping(this, 'Pistacho Dubai')"> 
+                        <span class="material-symbols-outlined text-[18px]">workspace_premium</span> <span>Pistacho Dubai</span> 
+                    </button> 
+                    <button class="px-space-md py-2.5 rounded-full bg-surface-container-highest/80 backdrop-blur-md text-on-surface font-label-md text-label-md flex items-center gap-space-xs shadow-sm transition-all active:scale-95" onclick="toggleTopping(this, 'Lluvia de Oreo')"> 
+                        <span class="material-symbols-outlined text-tertiary text-[18px]">grain</span> <span>Lluvia de Oreo</span> 
+                    </button> 
+                </div> 
+                
+                <div class="mt-space-sm p-space-sm rounded-DEFAULT bg-surface-container-low/70 backdrop-blur-md flex items-center justify-between gap-space-xs" id="topping-feedback"> 
+                    <div class="flex items-center gap-space-xs min-w-0"> 
+                        <span class="material-symbols-outlined text-primary text-[20px] shrink-0">recommend</span> 
+                        <span class="font-body-sm text-body-sm text-on-surface truncate" id="feedback-text">Combinación: Pistacho Dubai</span> 
+                    </div> 
+                    <button class="px-space-sm py-1.5 rounded-full bg-[#25D366] text-white font-label-sm text-label-sm shrink-0 flex items-center gap-1 active:scale-95 transition-all shadow-[0_0_10px_rgba(37,211,102,0.4)]" onclick="orderCustomCombo()"> 
+                        <span class="material-symbols-outlined text-[15px]">chat</span> <span>Pedir Combo</span> 
+                    </button> 
+                </div> 
+            </section> 
+
+            <!-- SECTION 5: GALERÍA SOCIAL Y COMUNIDAD --> 
+            <section class="mt-space-xl flex flex-col"> 
+                <div class="flex flex-col mb-space-sm"> 
+                    <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">Comunidad &amp; Pasión</span> 
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">La Familia Churro Kings</h2> 
+                </div> 
+                
+                <div class="grid grid-cols-1 gap-space-sm"> 
+                    <div class="relative rounded-lg overflow-hidden bg-surface-container shadow-[0_12px_28px_rgba(0,0,0,0.5)]"> 
+                        <div class="h-56 w-full overflow-hidden"> 
+                            <img alt="Equipo Churro Kings con uniformes en Parque Ferial" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfCVdWHQuoZkAjAC472uOgpWk2XnT4yVriTYyQMd3Bhb_-Q9waCvMeLUnv4DPCmO1t61WFs-JT1RuVHHgZGJxytsVzgtSm2jGyzYXqKj3Ruk3aqtwgkv1J5mh6uY7O5YSv-9ZLfELLUSwIWBzHec77qv3cf8HLCXQ9eBH2kJUSvTcPQ11XNxH9O580mGGrpTIUIYL6X3Aoi8TSbCqgYGsL1IYS9ZMlJd-kR_mx3DSJ1g5MSTy4Dc0asFNg8fum3DjSuw"/> 
+                        </div> 
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div> 
+                        <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between"> 
+                            <div class="flex flex-col"> 
+                                <span class="font-label-sm text-label-sm text-secondary uppercase font-bold">El Equipo Real</span> 
+                                <span class="font-headline-sm text-headline-sm text-on-surface">Friendo felicidad al instante</span> 
+                            </div> 
+                            <a class="px-space-sm py-1 rounded-full bg-[#25D366] text-white font-label-sm text-label-sm flex items-center gap-1 shadow-md hover:scale-105 transition-transform" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Los%20vi%20en%20su%20web%20y%20quiero%20hacer%20un%20pedido" rel="noopener noreferrer" target="_blank"> 
+                                <span class="material-symbols-outlined text-[14px]">chat</span> <span>Chatear</span> 
+                            </a> 
+                        </div> 
+                    </div> 
+
+                    <div class="grid grid-cols-2 gap-space-sm"> 
+                        <div class="relative rounded-lg overflow-hidden bg-surface-container shadow-[0_8px_20px_rgba(0,0,0,0.4)]"> 
+                            <div class="h-44 w-full"> 
+                                <img alt="Clientes felices disfrutando en Churro Kings" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-pUzEv9_IoUCcWSfKubLOagu3fKmeXfkubx7vD_8fsWKwdivytZDNlHQ7IxgSkJ2N0yA2cLAULQjbAJTbz964PYcuUtE5mmBYTAafbAURrX4X-CQLb_-0Dh1AYTe68iBbVrN_QavgyAmSXV5KAQNIObs4Rr2uClN6yjbM0kYQ1oyU8GrX5QhlQjGREDxuCrzlnguetTn-_nFOqz9mSi8iYfMe1Lca7OO3vet4QtOH8DQedm8D6job5dKZ72YnxgfD2A"/> 
+                            </div> 
+                            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent"></div> 
+                            <div class="absolute bottom-2 left-2 right-2"> 
+                                <span class="font-label-sm text-label-sm text-secondary font-bold">Dulce Antojo</span> 
+                            </div> 
+                        </div> 
+                        
+                        <div class="p-space-md rounded-lg bg-surface-container-high/80 backdrop-blur-xl flex flex-col justify-center items-center text-center shadow-[0_8px_20px_rgba(0,0,0,0.4)]"> 
+                            <span class="material-symbols-outlined text-primary-container text-[32px] drop-shadow-[0_0_12px_#ff6b00]">groups</span> 
+                            <span class="mt-1 font-display-lg-mobile text-display-lg-mobile text-on-surface font-black leading-none">+540</span> 
+                            <span class="mt-1 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Reyes del dulce cada semana</span> 
+                        </div> 
+                    </div> 
+                </div> 
+            </section> 
+
+            <!-- SECTION 6: FOOTER DE CONVERSIÓN Y PEDIDO RÁPIDO --> 
+            <section class="mt-space-xl flex flex-col"> 
+                <div class="relative overflow-hidden rounded-lg bg-gradient-to-b from-surface-container-high to-surface-container-lowest p-space-lg backdrop-blur-2xl shadow-[0_16px_40px_rgba(255,107,0,0.25)] text-center flex flex-col items-center"> 
+                    <div class="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-[0_0_24px_rgba(37,211,102,0.6)] mb-space-sm"> 
+                        <span class="material-symbols-outlined text-[30px]">chat</span> 
+                    </div> 
+                    <h3 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">¿Se te hace agua la boca?</h3> 
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-xs mt-1 mb-space-md">Haz tu pedido caliente en 2 toques por WhatsApp y recíbelo al momento en Ocumare del Tuy.</p> 
+                    
+                    <a class="w-full h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-[0_0_32px_rgba(37,211,102,0.6)] active:scale-[0.98] transition-transform" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Quiero%20hacer%20un%20pedido%20caliente%20ahora%20mismo" rel="noopener noreferrer" target="_blank"> 
+                        <span class="material-symbols-outlined text-[24px]">chat</span> <span>Pedir por WhatsApp ahora</span> 
+                    </a> 
+                    
+                    <div class="mt-space-lg flex items-center gap-space-md"> 
+                        <a class="flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="https://instagram.com/churrokings.ve" rel="noopener noreferrer" target="_blank"> 
+                            <span class="material-symbols-outlined text-[16px]">photo_camera</span> <span>@churrokings.ve</span> 
+                        </a> 
+                        <span class="text-outline-variant">|</span> 
+                        <span class="font-label-md text-label-md text-on-surface-variant">Parque Ferial</span> 
+                    </div> 
+                    <span class="mt-space-sm font-label-sm text-label-sm text-outline-variant">© Churro Kings. El Reino del Sabor Artesanal.</span> 
+                </div> 
+            </section> 
+
+            <!-- FIRMA Coval Studio -->
+            <div class="mt-8 mb-6 text-center">
+                <span class="font-label-md text-label-md text-on-surface-variant">
+                    Hecho por <span class="font-bold text-primary tracking-wider uppercase">Coval Studio</span>
+                </span>
+            </div>
+
+        </div> 
+
+        <script>   
+            let selectedToppings = ['Pistacho Dubai'];   
+            
+            function orderWhatsApp(itemName) {     
+                const message = encodeURIComponent(`¡Hola Churro Kings! 👑 Quiero ordenar: ${itemName}. ¿Tienen disponibilidad inmediata para Ocumare del Tuy?`);     
+                window.open(`https://wa.me/5804128195528?text=${message}`, '_blank');   
+            }
+
+            function orderCustomCombo() {     
+                const list = selectedToppings.length > 0 ? selectedToppings.join(', ') : 'Churro clásico con azúcar y canela';     
+                const message = encodeURIComponent(`¡Hola Churro Kings! 👑 Quiero armar mi pedido con estos toppings: ${list}. ¿Me confirman el total?`);     
+                window.open(`https://wa.me/5804128195528?text=${message}`, '_blank');   
+            }
+
+            function toggleTopping(btn, name) {     
+                const isSelected = btn.classList.contains('bg-primary-container');     
+                const feedback = document.getElementById('feedback-text');          
+                
+                if (isSelected) {       
+                    btn.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-[0_0_14px_#ff6b00]');       
+                    btn.classList.add('bg-surface-container-highest/80', 'text-on-surface');       
+                    selectedToppings = selectedToppings.filter(t => t !== name);     
+                } else {       
+                    btn.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-[0_0_14px_#ff6b00]');       
+                    btn.classList.remove('bg-surface-container-highest/80', 'text-on-surface');       
+                    if (!selectedToppings.includes(name)) {         
+                        selectedToppings.push(name);       
+                    }     
+                }          
+                
+                if (selectedToppings.length > 0) {       
+                    feedback.textContent = `Seleccionados: ${selectedToppings.join(' + ')}`;     
+                } else {       
+                    feedback.textContent = 'Selecciona toppings para tu orden personalizada';     
+                }   
+            }
+
+            // ANIMACIÓN 3D HIPERREALISTA DE CHURRO ARTESANAL   
+            window.addEventListener('DOMContentLoaded', () => {     
+                const container = document.getElementById('churro-3d-canvas-container');     
+                if (!container) return;     
+                const width = container.clientWidth || 360;     
+                const height = container.clientHeight || 320;     
+                const scene = new THREE.Scene();     
+                scene.fog = new THREE.FogExp2(0x19120d, 0.05);     
+                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);     
+                camera.position.set(0, 0.2, 5.2);     
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });     
+                renderer.setSize(width, height);     
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));     
+                renderer.shadowMap.enabled = true;     
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;     
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;     
+                renderer.toneMappingExposure = 1.15;     
+                container.appendChild(renderer.domElement);     
+                
+                // Luces de iluminación de repostería cálida y dorada     
+                const ambientLight = new THREE.AmbientLight(0xffecd6, 0.85);     
+                scene.add(ambientLight);     
+                const keyLight = new THREE.DirectionalLight(0xff9e43, 2.8);     
+                keyLight.position.set(4, 5, 4);     
+                scene.add(keyLight);     
+                const rimLight = new THREE.DirectionalLight(0xffc278, 2.2);     
+                rimLight.position.set(-4, -2, -3);     
+                scene.add(rimLight);     
+                const bottomGlow = new THREE.PointLight(0xff6b00, 3.2, 10);     
+                bottomGlow.position.set(0, -2, 2);     
+                scene.add(bottomGlow);     
+                const topAccent = new THREE.PointLight(0xffd580, 2.0, 8);     
+                topAccent.position.set(0, 3, 1);     
+                scene.add(topAccent);     
+                
+                // GRUPO PRINCIPAL DEL CHURRO     
+                const churroGroup = new THREE.Group();     
+                scene.add(churroGroup);     
+                
+                // 1. GENERACIÓN DEL CHURRO CON PERFIL ESTRELLADO ACANALADO REALISTA (Fluted Star Cross-Section)     
+                class ChurroCurve extends THREE.Curve {       
+                    constructor(scale = 1) {         
+                        super();         
+                        this.scale = scale;       
+                    }       
+                    getPoint(t, optionalTarget = new THREE.Vector3()) {         
+                        const angle = (t - 0.5) * Math.PI * 1.05;         
+                        const x = Math.sin(angle) * 1.55 * this.scale;         
+                        const y = (Math.cos(angle * 1.1) * 1.4 - 0.4) * this.scale;         
+                        const z = Math.sin(angle * 2) * 0.45 * this.scale;         
+                        return optionalTarget.set(x, y, z);       
+                    }     
+                }     
+                
+                const path = new ChurroCurve(1.15);     
+                const starShape = new THREE.Shape();     
+                const numRidges = 8;     
+                const outerRadius = 0.28;     
+                const innerRadius = 0.17;     
+                for (let i = 0; i < numRidges * 2; i++) {       
+                    const angle = (i / (numRidges * 2)) * Math.PI * 2;       
+                    const radius = (i % 2 === 0) ? outerRadius : innerRadius;       
+                    const sx = Math.cos(angle) * radius;       
+                    const sy = Math.sin(angle) * radius;       
+                    if (i === 0) starShape.moveTo(sx, sy);       
+                    else starShape.lineTo(sx, sy);     
+                }     
+                starShape.closePath();     
+                
+                const extrudeSettings = { steps: 120, bevelEnabled: true, extrudePath: path };     
+                const churroGeo = new THREE.ExtrudeGeometry(starShape, extrudeSettings);     
+                
+                // Textura de masa frita dorada con pequeñas motitas crujientes     
+                const canvasTexture = document.createElement('canvas');     
+                canvasTexture.width = 512;     
+                canvasTexture.height = 512;     
+                const ctx = canvasTexture.getContext('2d');     
+                ctx.fillStyle = '#b86214';     
+                ctx.fillRect(0, 0, 512, 512);     
+                for (let i = 0; i < 3500; i++) {       
+                    const rx = Math.random() * 512;       
+                    const ry = Math.random() * 512;       
+                    const rw = Math.random() * 3 + 1;       
+                    const shade = Math.random() > 0.5 ? 'rgba(74, 33, 4, 0.45)' : 'rgba(240, 185, 110, 0.55)';       
+                    ctx.fillStyle = shade;       
+                    ctx.fillRect(rx, ry, rw, rw);     
+                }     
+                
+                const bakedTexture = new THREE.CanvasTexture(canvasTexture);     
+                bakedTexture.wrapS = THREE.RepeatWrapping;     
+                bakedTexture.wrapT = THREE.RepeatWrapping;     
+                bakedTexture.repeat.set(4, 20);     
+                
+                const churroMat = new THREE.MeshStandardMaterial({       
+                    color: 0xd9822b,       
+                    roughness: 0.72,       
+                    metalness: 0.08,       
+                    map: bakedTexture,       
+                    bumpMap: bakedTexture,       
+                    bumpScale: 0.04     
+                });     
+                const churroMesh = new THREE.Mesh(churroGeo, churroMat);     
+                churroMesh.castShadow = true;     
+                churroMesh.receiveShadow = true;     
+                churroGroup.add(churroMesh);     
+                
+                // 2. GLACEADO / SIROPE DE CHOCOLATE Y CARAMELO ESCURRIENDO     
+                const syrupPoints = [];     
+                const totalSyrupSteps = 180;     
+                for (let i = 0; i <= totalSyrupSteps; i++) {       
+                    const t = i / totalSyrupSteps;       
+                    const basePoint = path.getPoint(t);       
+                    const angle = t * Math.PI * 18;        
+                    const radiusOffset = 0.285 + Math.sin(t * 24) * 0.03;       
+                    const ox = Math.cos(angle) * radiusOffset;       
+                    const oz = Math.sin(angle) * radiusOffset;       
+                    syrupPoints.push(new THREE.Vector3(basePoint.x + ox, basePoint.y, basePoint.z + oz));     
+                }     
+                const syrupCurve = new THREE.CatmullRomCurve3(syrupPoints);     
+                const syrupGeo = new THREE.TubeGeometry(syrupCurve, 140, 0.045, 8, false);     
+                const syrupMat = new THREE.MeshPhysicalMaterial({       
+                    color: 0x3d1704,        
+                    roughness: 0.15,       
+                    metalness: 0.1,       
+                    clearcoat: 1.0,       
+                    clearcoatRoughness: 0.1,       
+                    reflectivity: 0.95     
+                });     
+                const syrupMesh = new THREE.Mesh(syrupGeo, syrupMat);     
+                churroGroup.add(syrupMesh);     
+                
+                // 3. HILOS ADICIONALES DE SIROPE DE AREQUIPE / CARAMELO DORADO     
+                const caramelPoints = [];     
+                for (let i = 0; i <= totalSyrupSteps; i++) {       
+                    const t = i / totalSyrupSteps;       
+                    const basePoint = path.getPoint(t);       
+                    const angle = t * Math.PI * 16 + Math.PI;        
+                    const radiusOffset = 0.275;       
+                    const ox = Math.cos(angle) * radiusOffset;       
+                    const oz = Math.sin(angle) * radiusOffset;       
+                    caramelPoints.push(new THREE.Vector3(basePoint.x + ox, basePoint.y - 0.02, basePoint.z + oz));     
+                }     
+                const caramelCurve = new THREE.CatmullRomCurve3(caramelPoints);     
+                const caramelGeo = new THREE.TubeGeometry(caramelCurve, 120, 0.032, 8, false);     
+                const caramelMat = new THREE.MeshPhysicalMaterial({       
+                    color: 0xdf791a,        
+                    roughness: 0.2,       
+                    metalness: 0.05,       
+                    clearcoat: 1.0,       
+                    clearcoatRoughness: 0.15,       
+                    transmission: 0.35,       
+                    opacity: 0.95,       
+                    transparent: true     
+                });     
+                const caramelMesh = new THREE.Mesh(caramelGeo, caramelMat);     
+                churroGroup.add(caramelMesh);     
+                
+                // 4. GOTITAS DE SIROPE ESCURRIENDO (Drips)     
+                for (let d = 0; d < 6; d++) {       
+                    const dripGeo = new THREE.SphereGeometry(0.065, 12, 12);       
+                    dripGeo.scale(0.8, 1.4, 0.8);       
+                    const dripMat = (d % 2 === 0) ? syrupMat : caramelMat;       
+                    const drip = new THREE.Mesh(dripGeo, dripMat);       
+                    const t = 0.2 + (d * 0.13);       
+                    const pt = path.getPoint(t);       
+                    drip.position.set(pt.x + (Math.sin(d) * 0.18), pt.y - 0.25, pt.z + (Math.cos(d) * 0.15));       
+                    churroGroup.add(drip);     
+                }     
+                
+                // 5. DESTELLOS DE AZÚCAR Y CANELA FLOTANTES BRILLANTES (Sugar & Sparkle Particles)     
+                const sugarCount = 220;     
+                const sugarGeo = new THREE.BufferGeometry();     
+                const sugarPositions = new Float32Array(sugarCount * 3);     
+                const sugarScales = new Float32Array(sugarCount);     
+                for (let i = 0; i < sugarCount; i++) {       
+                    const t = Math.random();       
+                    const pt = path.getPoint(t);       
+                    const spread = 0.55;       
+                    sugarPositions[i * 3] = pt.x + (Math.random() - 0.5) * spread;       
+                    sugarPositions[i * 3 + 1] = pt.y + (Math.random() - 0.5) * spread;       
+                    sugarPositions[i * 3 + 2] = pt.z + (Math.random() - 0.5) * spread;       
+                    sugarScales[i] = Math.random() * 0.04 + 0.015;     
+                }     
+                sugarGeo.setAttribute('position', new THREE.BufferAttribute(sugarPositions, 3));     
+                const sugarMat = new THREE.PointsMaterial({       
+                    color: 0xfffae0,       
+                    size: 0.05,       
+                    transparent: true,       
+                    opacity: 0.9,       
+                    blending: THREE.AdditiveBlending     
+                });     
+                const sugarParticles = new THREE.Points(sugarGeo, sugarMat);     
+                churroGroup.add(sugarParticles);     
+                
+                // INTERACCIÓN TÁCTIL Y DE RATÓN FLUIDA     
+                let isDragging = false;     
+                let previousPointerPosition = { x: 0, y: 0 };     
+                let targetRotationX = 0.1;     
+                let targetRotationY = 0.4;     
+                let autoRotate = true;     
+                
+                function onPointerDown(e) {       
+                    isDragging = true;       
+                    autoRotate = false;       
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;       
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;       
+                    previousPointerPosition = { x: clientX, y: clientY };     
+                }     
+                
+                function onPointerMove(e) {       
+                    if (!isDragging) return;       
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;       
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;       
+                    const deltaX = clientX - previousPointerPosition.x;       
+                    const deltaY = clientY - previousPointerPosition.y;       
+                    targetRotationY += deltaX * 0.01;       
+                    targetRotationX += deltaY * 0.01;       
+                    previousPointerPosition = { x: clientX, y: clientY };     
+                }     
+                
+                function onPointerUp() {       
+                    isDragging = false;       
+                    setTimeout(() => { autoRotate = true; }, 3500);     
+                }     
+                
+                container.addEventListener('mousedown', onPointerDown);     
+                window.addEventListener('mousemove', onPointerMove);     
+                window.addEventListener('mouseup', onPointerUp);     
+                container.addEventListener('touchstart', onPointerDown, { passive: true });     
+                window.addEventListener('touchmove', onPointerMove, { passive: true });     
+                window.addEventListener('touchend', onPointerUp, { passive: true });     
+                
+                // CICLO DE ANIMACIÓN     
+                let clock = new THREE.Clock();     
+                function animate() {       
+                    requestAnimationFrame(animate);       
+                    const elapsedTime = clock.getElapsedTime();       
+                    if (autoRotate) {         
+                        targetRotationY += 0.007;         
+                        targetRotationX = Math.sin(elapsedTime * 0.8) * 0.15;       
+                    }       
+                    // Amortiguación fluida (lerp)       
+                    churroGroup.rotation.y += (targetRotationY - churroGroup.rotation.y) * 0.08;       
+                    churroGroup.rotation.x += (targetRotationX - churroGroup.rotation.x) * 0.08;       
+                    churroGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.08;       
+                    // Destellos del azúcar       
+                    sugarParticles.rotation.y = elapsedTime * 0.04;       
+                    sugarParticles.rotation.z = Math.sin(elapsedTime * 0.5) * 0.05;       
+                    renderer.render(scene, camera);     
+                }     
+                animate();     
+                
+                // Redimensionamiento responsive     
+                window.addEventListener('resize', () => {       
+                    if (!container) return;       
+                    const newWidth = container.clientWidth;       
+                    const newHeight = container.clientHeight;       
+                    camera.aspect = newWidth / newHeight;       
+                    camera.updateProjectionMatrix();       
+                    renderer.setSize(newWidth, newHeight);     
+                });   
+            }); 
+        </script>
+    </main>
+
+    <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-8px_32px_rgba(0,0,0,0.6)]" data-active-classes="text-primary-container font-label-md">
+        <div class="flex justify-around items-center h-20 px-gutter max-w-2xl mx-auto">
+            <a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs transition-colors text-primary-container font-label-md" href="#menu-seccion">
+                <span class="material-symbols-outlined text-[24px]">restaurant_menu</span>
+                <span class="font-label-sm text-label-sm">Menú</span>
+            </a>
+            <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-[#25D366] hover:text-white transition-colors" href="https://wa.me/5804128195528?text=Hola%20Churro%20Kings!%20%F0%9F%91%91%20Quiero%20hacer%20un%20pedido%20directo" rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[24px]">chat</span>
+                <span class="font-label-sm text-label-sm font-bold">WhatsApp</span>
+            </a>
+            <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors" href="https://maps.google.com/?q=Parque+Ferial+Ocumare+del+Tuy" rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[24px]">location_on</span>
+                <span class="font-label-sm text-label-sm">Sede</span>
+            </a>
+            <a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors" href="https://instagram.com/churrokings.ve" rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[24px]">photo_camera</span>
+                <span class="font-label-sm text-label-sm">Instagram</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>
